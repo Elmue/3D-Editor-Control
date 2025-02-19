@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <title>3D Render Control with interactive 3D Editor</title>
+    <meta name="description" content="Interactive 3D Editor and 3D Render control for System.Windows.Forms applications">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta http-equiv="MSThemeCompatible" content="Yes">
+    <meta http-equiv="Language" content="en">
+    <meta name="Author" content="ElmüSoft">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow"></head>
+    <style>
+    body          { font-family:Verdana; font-size:13px; background-color:#F9F8F1; }
+    h1            { font-size:25px; font-weight:bold; background-color:#007799; color:white; padding:8px 8px 8px 16px; margin-top:35px; border:solid 2px #77CCDD; border-radius: 10px; }
+    h2            { font-size:20px; font-weight:bold; background-color:#007799; color:white; padding:5px 3px 5px 8px; margin-top:10px; border:solid 1px #77CCDD; border-radius: 10px; }
+    h3            { font-size:17px; font-weight:bold; text-decoration:underline; color:#007799; margin-top:22px; margin-bottom:5px; }
+    h4            { font-size:13px; font-weight:bold; text-decoration:underline; color:#007799; margin-top:12px; margin-bottom:2px; }    
+    hr            { border: 3px solid #007799; border-radius: 5px; }
+    li            { padding-top:1px; padding-bottom:1px;}
+    code          { color:blue; }
+    a:hover       { color: #AA00FF; }
+    pre           { border:1px solid #AAAAAA; padding:2px; font-family:Courier New; font-size:12px; background-color:#FFFFDD; width:690px; }
+    .Pre          { border:1px solid #AAAAAA; padding:2px; font-family:Courier New; font-size:12px; background-color:white; }
+    .Link:hover   { color: #AA00FF; }
+    .Link, a      { color: blue; cursor:pointer; font-family:Verdana; font-size:12px; font-weight:bold; text-decoration:none; }
+    .DivFullSize  { position:absolute; visibility:hidden; background-color:#DDDDDD; padding:0px 10px 10px 10px; border:1px solid black; box-shadow: 5px 5px 5px #777; }
+    .Warning      { border:2px solid red; padding:5px; font-weight:bold; }
+    .Error        { color:red; font-weight:bold; }
+    .TblImage     { border:1px solid #CCCCCC; border-spacing: 0px; margin-top:15px; margin-bottom:15px; }
+    .TblImage td  { padding:0px; }
+    .TblImage th  { background-color:#777777; color:#FFFFFF; padding:1px 5px 2px 5px; font-weight:bold; }
+    .NoTopMargin  { margin-top:0px; }
+    .Highlight    { background-color:#FFFFAA; }
+    .Center       { text-align:center; }
+    .Right        { text-align:right; }
+    .Green        { color:green; }
+    .Red          { color:red; }
+    .Orange       { color:orange; }
+    .DarkRed      { color:#AA0000; }
+    .Blue         { color:blue; }
+    .Magenta      { color:magenta; }
+    .Gray         { color:#888888; }
+    .Time         { color:#775533; }
+    .Big          { font-size:15px; font-weight:bold; }
+    .Img          { border:1px solid #CCCCCC; }
+    .LineTop      { border-top:1px solid #CCCCCC; }
+    .LineBot      { border-bottom:1px solid #CCCCCC; }
+    .Translate    { background-color: #007799; border:2px solid #77CCDD; border-radius: 10px; }
+    .Translate td { color:white; padding:10px; }
+    .Assembler    { border:1px solid gray; padding:5px; }
+    .Assembler b  { color:blue; }
+    .Assembler code  { color:#DD8800; }
+    .Over         { text-decoration:overline; }
+    .OrangeSquare { background-color:#FFCC99; font-weight:bold; border-width:1px; border-style:solid; border-color:black; padding:1px; line-height:22px; }
+
+    .DataTable    { background-color:#333333; margin-top:10px; margin-bottom:10px; }
+    .DataTable th { background-color:#777777; color:#FFFFFF; padding:1px 5px 2px 5px; font-weight:bold; }
+    .DataTable tr { background-color:#F8F8F8; }
+    .DataTable td { background-color:#FFFFF8; padding:3px; }
+    .DataTable h3 { font-size:17px; font-weight:bold; text-decoration:underline; color:#007799; margin-top:8px; margin-bottom:0px; }
+
+    .PopupMenu { position:fixed; top:0px; right:0px; border:2px solid #77CCDD; z-index: 999; padding:5px; background-color:#007799; color:white; font-weight:bold; font-family:Arial,Helvetica,Sans-serif; font-size:13px; cursor:default; }
+    .MenuLink { color:white; text-decoration:none; }
+    .MenuLink:hover { color:#CCCCFF; }
+    </style>
+</head>
+<body>
+
+<h1>3D Render Control with interactive 3D Editor in C#</h1>
+<p>
+<div><b>A universal ready-to-use interactive 3D Editor control for System.Windows.Forms applications.</b></div>
+<div><b>It displays 3D data that the user can modify with the mouse. </b></div>
+<div><b>The control consists of a single C# file and is optimized for maximum speed.</b></div>
+<div><b>It is easy to use and can be integrated into an application in a few minutes</b></div>
+
+<p>
+<img src="Images/Editor3D_Main.png" alt="System.Windows.Forms 3D Editor Control in C#" width="699" height="614">
+</p>
+
+<h3>Features</h3>
+<ul>
+  <li>BUGFIX: Drawing missing surface points in surface grid.
+  <li>New demo 'Surface Missing' shows how to draw a surface plot with missing points.
+  <li>User mouse actions can be defined 100% individually.
+  <li>Axis legends can be drawn also at the end of the main axes.
+  <li>X and Y axes can be mirrored.
+  <li>Option to include zero value of Z-axis or not.
+  <li>Added Undo / Redo buffer for user operations.
+  <li>BUGFIX: Drawing of selected multi-color lines
+  <li>The control has been completely rewritten (4100 lines of code, 170 kB filesize!)
+  <li>The user can select 3D objects with the mouse while pressing the ALT key.
+  <li>The user can move points or objects with the mouse in the 3D space.
+  <li>A callback provides full control over user actions and object selection.
+  <li>3D objects can be added, modified and removed on the fly.
+  <li>A new demo "Animation" shows how to dynamically change properties of 3D objects.
+  <li>The border color changes when the 3D editor gets the keyboard focus
+  <li>Line width and scatter point size are adapted when zooming
+  <li>Can be configured to use only the left or middle mouse button for all movements
+  <li>Support for drawing 3D objects. Added example "Pyramid" and "Sphere"
+  <li>Rendering speed optimized to the extreme
+  <li>BUGFIX: Sometimes the Z axis was drawn on top of the 3D object instead behind
+  <li>Display a tooltip when the mouse is over a 3D point
+  <li>Resizing of 3D object when resizing 3D control
+  <li>Completely rewritten to allow display of multiple graphs at the same time
+  <li>Individual color scheme for each graph
+  <li>Surface plots can also be drawn as grid
+  <li>User messages can be drawn into the control
+  <li>Added scatter squares and triangles
+  <li>Copy Screenshot to Image
+  <li>Set Rho, Theta, Phi programmatically
+  <li>Drawing of scatterplots
+  <li>Coordinate system now also with negative values
+  <li>Universal ready-to-use 3D Graph control for System.Windows.Forms applications
+  <li>Derived from UserControl
+  <li>Target: Framework 4 (Visual Studio 2010 or higher)
+  <li>Display of 3 dimensional functions or binary data  (X, Y, Z values)
+  <li>Very clean and reusable code written by an experienced programmer
+  <li>All code is in one single C# file with &lt; 1200 lines
+  <li>Optional function compiler allows to enter formulas as strings
+  <li>Optional coordinate system with raster lines and labels
+  <li>Optionally multiple color schemes
+  <li>The user can rotate, elevate and zoom with the mouse or with 3 optional TrackBars
+  <li>Zooming is also possible with the mouse wheel, but only if the 3D Graph has the focus.
+  <li>The entire code is optimized for the maximum speed that is  possible.
+  <li>An optional legend displays the current rotation angles to the user in the top left corner.
+  <li>An optional legend displays a user defined text for the axis in the bottom left corner.
+  <li>The black lines between the polygons can be turned off.
+  <li>Automatic normalization of 3D input data with 3 options
+</ul>
+
+<h3>Why this Project?</h3>
+<p>
+I'am writing an ECU tunig software <a href="https://netcult.ch/elmue/HUD%20ECU%20Hacker" target="_blank">HUD ECU Hacker</a> for which I need a 3D Viewer
+which displays the calibration tables.
+<br>I searched a  ready-to-use 3D Control in internet but could not find what fits my  needs.
+<br>Huge 3D software projects like Helix Toolkit are completely overbloated (220 MB) for my small project.
+<br>Commercial 3D software from $250 USD up to $2900 USD is also not an option.
+</p>
+<p>
+<h3>WPF 3D Chart (from Jianzhong Zhang)</h3>
+I found <a href="https://www.codeproject.com/Articles/42174/High-performance-WPF-3D-Chart" target="_blank">WPF 3D Chart</a> on Codeproject.
+<br>
+<br>It is very fast because WPF uses hardware acceleration.
+<br>The graphics processor can render 3D surfaces which must be composed of triangles.
+<br>But it is difficult to render lines. Each line would have to be defined as 2 triangles.
+<br>I need lines for the coordinate system.
+<br>I also need lines which display discrete values on the 3D surface.
+<br>I want each value in a data table to be represented as a polygon on the 3D object.
+<br>The screenshot at the top shows the representation of a data table with 22 rows and 17 columns.
+<br>I found it too complicated to implement this in WPF.
+<br>Extra work must be done to integrate a WPF control into a Windows.Forms application. See this <a href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/walkthrough-hosting-a-wpf-composite-control-in-windows-forms" target="_blank">article</a>.
+
+<h3>Plot 3D (from Michal Brylka)</h3>
+
+Then I found <a href="https://www.codeproject.com/Articles/17715/Plot-3D-surfaces" target="_blank">Plot 3D</a> on Codeproject.
+<br>This is more what I'am looking for but the code is not reusable and has many issues.
+<br>
+<br>It is one of these many projects on  Codeproject or Github which the author never has finished, which are buggy and lack functionality.
+<br>There is  no useful way to rotate the 3D object.
+Instead of specifying a rotation angle you must specify the 3D observer coordinates which is a complete misdesign.
+<br>After fixing this I found that rotation results in ugly drawing artifacts  at certain angles.
+<br>The reason is that the polygons are not rendered in the correct order.
+<br>The code has a bad performance because of wrong programming.
+For example in <code>OnPaint()</code> he creates each time 100 brushes and disposes them afterwards.
+<br>The code has been designed only for formulas but assigning fix values from a data table is not possible.
+
+
+<h3>Editor3D (from Elmü)</h3>
+
+I ended up rewriting Plot 3D from the scratch, bug fixing and adding a lot of missing functionality.
+<br>The result is a UserControl which you can copy unchanged into your project and which you get working in a few minutes.
+<br>The features of my control are already listed above.
+<br>As my code does not use hardware acceleration the number of polygons that you display determines the drawing speed.
+<br>Without problem you can rotate and elevate the 3D objects of the demos in real time with  the mouse without any delay.
+<br>However if you want to render far more polygons it will be obviously slower.
+<br>For my purpose I need less than 2000 polygons which allows real time rotating with the mouse.
+<br>Download  the ZIP file and then run the already compiled EXE file and play around with it and you will see the speed.
+
+
+
+
+<h3>Demo: Surface Fill</h3>
+
+<img src="Images/Editor3D_Surface.png" alt="System.Windows.Forms 3D Editor Control in C#" width="695" height="642">
+
+<p>
+Here you see data from a table with 22x17 values displayed as 3D surface with coordinate system.
+
+<pre>
+int[,] s32_Values = new int[,]
+{
+    { 9059,   9634, 10617, 11141, ....., 15368, 15368, 15368, 15368, 15368 }, // row 1
+    { 9684,  10387, 11141, 11796, ....., 15794, 15794, 15794, 15794, 15794 }, // row 2
+    .........
+    { 34669, 34210, 33653, 33096, ....., 27886, 26492, 25167, 25167, 25167 }, // row 21
+    { 34767, 34210, 33718, 33096, ....., 27984, 26492, 25167, 25167, 25167 }  // row 22
+};
+
+int s32_Cols = s32_Values.GetLength(1);
+int s32_Rows = s32_Values.GetLength(0);
+
+cColorScheme i_Scheme = new cColorScheme(me_ColorScheme);
+cSurfaceData i_Data   = new cSurfaceData(e_Mode, s32_Cols, s32_Rows, Pens.Black, i_Scheme);
+
+for (int C=0; C&lt;i_Data.Cols; C++)
+{
+    for (int R=0; R&lt;i_Data.Rows; R++)
+    {
+        int s32_RawValue = s32_Values[R,C];
+
+        double d_X = C * 640.0; // X must be related to colum
+        double d_Y = R *   5.0; // Y must be related to row
+        double d_Z = s32_RawValue / 327.68;
+
+        String s_Tooltip = String.Format("Speed = {0} rpm\nMAP = {1} kPa\n"
+                                       + "Volume Eff. = {2} %\nColumn = {3}\nRow = {4}", 
+                                         d_X, d_Y, Editor3D.FormatDouble(d_Z), C, R);
+
+        cPoint3D i_Point = new cPoint3D(d_X, d_Y, d_Z, s_Tooltip, s32_RawValue);
+
+        i_Data.SetPointAt(C, R, i_Point);
+    }
+}
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.Separate;
+editor3D.AxisY.Mirror = true;
+editor3D.AxisX.LegendText = "Engine Speed (rpm)";
+editor3D.AxisY.LegendText = "MAP (kPa)";
+editor3D.AxisZ.LegendText = "Volume Efficiency (%)";
+editor3D.AddRenderData(i_Data);
+
+editor3D.Selection.Callback       = OnSelectEvent;
+editor3D.Selection.HighlightColor = Color.FromArgb(90, 90, 90); // gray
+editor3D.Selection.MultiSelect    = true;
+editor3D.Selection.Enabled        = true;
+editor3D.Invalidate();</pre>
+</p>
+<p>
+When you use discrete values for X,Y and Z which are not related like in this example make sure that X,Y and Z values
+are <b>normalized</b> separately by using the parameter <code>eNormalize.Separate</code> because the axes have different ranges.
+<p>
+Each point in the grid has a <b>tooltip</b> assigned which shows the values X,Y,Z, Row, Column and Raw value.
+<p>
+This demo allows user <b>selection</b> of multiple polygons or points in the grid while pressing the ALT key.
+<br>The Z-values of the selected points can then be <b>modified</b> with the mouse while pressing ALT + CTRL.
+<br>The selection and movement are handled in a user defined <b>callback</b>: <code>OnSelectEvent()</code>.
+
+<h3>Mirroring Axes</h3>
+
+<img src="Images/Editor3D_Mirror.png" class="Img" alt="System.Windows.Forms 3D Editor Control in C#" width="670" height="383">
+
+<p>Use Demo Surface Fill to test the checkboxes "Mirror X" and "Mirror Y".
+<p>&nbsp;</p>
+
+<h3>Demo: Math Callback</h3>
+
+<img src="Images/Editor3D_Callback.png" alt="System.Windows.Forms 3D Editor Control in C#" width="695" height="597">
+
+<p>
+Or you can write a C# callback function which calculates the Z values from the given X and Y values.
+
+<pre>cColorScheme i_Scheme = new cColorScheme(me_ColorScheme);
+cSurfaceData i_Data   = new cSurfaceData(ePolygonMode.Fill, 49, 33, Pens.Black, i_Scheme);
+
+delRendererFunction f_Callback = delegate(double X, double Y)
+{
+    double r = 0.15 * Math.Sqrt(X * X + Y * Y);
+    if (r &lt; 1e-10) return 120;
+    else           return 120 * Math.Sin(r) / r;
+};
+
+i_Data.ExecuteFunction(f_Callback, new PointF(-120, -80), new PointF(120, 80));
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.MaintainXYZ;
+editor3D.AddRenderData(i_Data);
+editor3D.Invalidate();</pre>
+
+A modulated sinus function is displayed on the X axis from -120 to +120 and on the Y axis from -80 to +80.
+<br>The 49 columns and 33 rows of points result in 48 columns and 32 rows of polygons (totally 1536).
+<p>
+When you use functions make sure that the relation between X,Y and Z values is not distorted by using the parameter <code>eNormalize.MaintainXYZ</code>.
+<p>&nbsp;</p>
+
+
+
+
+
+
+<h3>Demo: Math Formula</h3>
+
+<img src="Images/Editor3D_Formula.png" alt="System.Windows.Forms 3D Editor Control in C#" width="695" height="597">
+
+<p>
+Or you can let the user enter a string formula which will be compiled at run time:
+
+<pre>
+cColorScheme i_Scheme = new cColorScheme(me_ColorScheme);
+cSurfaceData i_Data   = new cSurfaceData(ePolygonMode.Fill, 41, 41, Pens.Black, i_Scheme);
+
+String s_Formula = "7 * sin(x) * cos(y) / (sqrt(sqrt(x * x + y * y)) + 0.2)";
+delRendererFunction f_Function = FunctionCompiler.Compile(s_Formula);
+i_Data.ExecuteFunction(f_Function, new PointF(-7, -7), new PointF(7, 7));
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.MaintainXYZ;
+editor3D.AddRenderData(i_Data);
+editor3D.Invalidate();</pre>
+<p>&nbsp;</p>
+
+
+
+
+
+<h3>Demo: Scatter Plot</h3>
+
+<img src="Images/Editor3D_ScatterPlot.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="638">
+
+<p>
+<pre>cColorScheme i_Scheme = new cColorScheme(me_ColorScheme);
+cScatterData i_Data   = new cScatterData(i_Scheme);
+
+for (double P = -22.0; P &lt; 22.0; P += 0.1)
+{
+    double d_X = Math.Sin(P) * P;
+    double d_Y = Math.Cos(P) * P;
+    double d_Z = P;
+    if (d_Z &gt; 0.0) d_Z /= 3.0;
+
+    cPoint3D i_Point = new cPoint3D(d_X, d_Y, d_Z, "Scatter Point");
+    i_Data.AddShape(i_Point, eScatterShape.Circle, 3, null);
+}
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.Separate;
+editor3D.AddRenderData(i_Data);
+editor3D.Invalidate();</pre>
+<p>&nbsp;</p>
+
+
+
+
+
+<h3>Demo: Scatter Shapes</h3>
+
+<img src="Images/Editor3D_ScatterShapes.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="596">
+
+<p>
+This demo shows negative values as red squares and positive values as green triangles.
+<br>Each point in this plot consists of 4 doubles: X,Y,Z and a value.
+<br>The value defines the size of the square or triangle while X,Y,Z define the position.
+<br>The value is displayed in the tooltip.
+
+<p>
+4 shapes are selected (blue) and can be moved with the mouse in the 3D space.
+
+<pre>double[,] d_Values = new double[,]
+{
+    // Value  X        Y      Z
+    {   0.39, 0.0051,  0.133, 0.66 },
+    {   0.23, 0.0002,  0.114, 0.87 },
+    {   1.46, 0.0007,  0.077, 0.72 },
+    {  -1.85, 0.0137,  0.053, 0.87 },
+    ......
+}
+
+// A ColorScheme is not needed because all points have their own Brush
+cScatterData i_Data = new cScatterData(null);
+
+for (int P = 0; P &lt; d_Values.GetLength(0); P++)
+{
+    double d_Value = d_Values[P, 0];
+    int s32_Radius = (int)Math.Abs(d_Value) + 1;
+
+    double X = d_Values[P,1];
+    double Y = d_Values[P,2];
+    double Z = d_Values[P,3];
+
+    eScatterShape e_Shape = (d_Value < 0) ? eScatterShape.Square : eScatterShape.Triangle;
+    Brush         i_Brush = (d_Value < 0) ? Brushes.Red          : Brushes.Lime;
+
+    String s_Tooltip = "Value = " + Editor3D.FormatDouble(d_Value);
+    cPoint3D i_Point = new cPoint3D(X, Y, Z, s_Tooltip, d_Value);
+
+    i_Data.AddShape(i_Point, e_Shape, s32_Radius, i_Brush);
+}
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.Separate;
+editor3D.AddRenderData(i_Data);
+editor3D.Invalidate();</pre>
+<p>&nbsp;</p>
+
+
+
+
+
+<h3>Demo: Nested Graphs</h3>
+
+<img src="Images/Editor3D_NestedGraphs.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="596">
+
+<p>This demo shows how to display 2 graphs at once.
+<br>It also shows how to add messages as a legend to the user (bottom left).
+<br>This demo demonstrates single point selection. The user can only select one point at a time.
+
+<pre>const int POINTS = 8;
+cSurfaceData i_Data1 = new cSurfaceData(ePolygonMode.Lines, 
+                       POINTS, POINTS, new Pen(Color.Orange, 3), null);
+cSurfaceData i_Data2 = new cSurfaceData(ePolygonMode.Lines, 
+                       POINTS, POINTS, new Pen(Color.Green,  2), null);
+
+for (int C=0; C&lt;POINTS; C++)
+{
+    for (int R=0; R&lt;POINTS; R++)
+    {
+        double d_X = (C - POINTS / 2.3) / (POINTS / 5.5); // X must be related to colum
+        double d_Y = (R - POINTS / 2.3) / (POINTS / 5.5); // Y must be related to row
+        double d_Radius = Math.Sqrt(d_X * d_X + d_Y * d_Y);
+        double d_Z = Math.Cos(d_Radius) + 1.0;
+
+        String  s_Tooltip = String.Format("Col = {0}\nRow = {1}", C, R);
+        cPoint3D i_Point1 = new cPoint3D(d_X, d_Y, d_Z,       s_Tooltip + "\nWrong Data");
+        cPoint3D i_Point2 = new cPoint3D(d_X, d_Y, d_Z * 0.6, s_Tooltip + "\nCorrect Data");
+
+        i_Data1.SetPointAt(C, R, i_Point1);
+        i_Data2.SetPointAt(C, R, i_Point2);
+    }
+}
+
+cMessgData i_Mesg1 = new cMessgData("Graph with error data",   7,  -7, Color.Orange);
+cMessgData i_Mesg2 = new cMessgData("Graph with correct data", 7, -24, Color.Green);
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.MaintainXY;
+editor3D.AddRenderData (i_Data1, i_Data2);
+editor3D.AddMessageData(i_Mesg1, i_Mesg2);
+editor3D.Selection.MultiSelect = false;
+editor3D.Selection.Enabled     = true;
+editor3D.Invalidate();</pre>
+<p>&nbsp;</p>
+
+
+
+
+
+<h3>Demo: Pyramid</h3>
+
+<img src="Images/Editor3D_Pyramid.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="595">
+
+<p>This demo shows a simple 3D object which consists of lines.
+<br>Normally lines are drawn in one solid color.
+<br>But this demo renders the vertical lines in 50 parts with colors from the rainbow scheme.
+
+<pre>cLineData i_Data = new cLineData(new cColorScheme(me_ColorScheme));
+
+cPoint3D i_Center  = new cPoint3D(45, 45, 40, "Center");
+cPoint3D i_Corner1 = new cPoint3D(45, 25, 20, "Corner 1");
+cPoint3D i_Corner2 = new cPoint3D(25, 45, 20, "Corner 2");
+cPoint3D i_Corner3 = new cPoint3D(45, 65, 20, "Corner 3");
+cPoint3D i_Corner4 = new cPoint3D(65, 45, 20, "Corner 4");
+
+// Add the 4 vertical lines which are rendered as 50 parts with different colors
+cLine3D i_Vert1 = i_Data.AddMultiColorLine(50, i_Center, i_Corner1, 4, null);
+cLine3D i_Vert2 = i_Data.AddMultiColorLine(50, i_Center, i_Corner2, 4, null);
+cLine3D i_Vert3 = i_Data.AddMultiColorLine(50, i_Center, i_Corner3, 4, null);
+cLine3D i_Vert4 = i_Data.AddMultiColorLine(50, i_Center, i_Corner4, 4, null);
+
+// Add the 4 base lines with solid color
+cLine3D i_Hor1 = i_Data.AddSolidLine(i_Corner1, i_Corner2, 8, null);
+cLine3D i_Hor2 = i_Data.AddSolidLine(i_Corner2, i_Corner3, 8, null);
+cLine3D i_Hor3 = i_Data.AddSolidLine(i_Corner3, i_Corner4, 8, null);
+cLine3D i_Hor4 = i_Data.AddSolidLine(i_Corner4, i_Corner1, 8, null);
+
+editor3D.Clear();
+editor3D.Normalize = eNormalize.Separate;
+editor3D.AxisZ.IncludeZero = false;
+editor3D.AddRenderData(i_Data);
+editor3D.Invalidate();</pre>
+
+<h3>Including Z Value Zero</h3>
+
+<img src="Images/Editor3D_IncludeZero.png" class="Img" alt="System.Windows.Forms 3D Editor Control in C#" width="677" height="364">
+
+<p>Use Demo Pyramid to test the checkbox "Include Zero Z".
+<br>The Z values of the pyramid range from 20 to 40.
+<br>You can chose if the bottom of the Z axis is 0 or 20.
+<p>&nbsp;</p>
+
+<h3>Demo: Sphere</h3>
+
+<img src="Images/Editor3D_Sphere.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="596">
+
+<p>This demo shows another 3D object which is rendered with polygons.
+<br>If you have been working with other 3D libraries (WPF, Direct3D) you know that all surfaces must be rendered as triangles.
+<br>But my library allows to pass polygons with any amount of corners (minimum 3).
+<br>This eliptic sphere contains a round polygon with 50 corners for the top and bottom.
+
+<pre>
+The code of this demo is a bit longer.
+Have a look into the source code.
+</pre>
+
+<p>&nbsp;</p>
+
+
+
+
+<h3>Modifying 3D Objects</h3>
+
+<img src="Images/Editor3D_ModifyPyramid.png" class="Img" alt="System.Windows.Forms 3D Editor Control in C#" width="336" height="370">
+
+<p>With the checkbox 'Point Selection' in the demo application you can chose if you want to select points or lines.
+<br>Press ALT and click a point of the pyramid to select it. A green circle marks it as selected.
+<br>Then press ALT + CTRL and drag the selecetd point(s) with the mouse in the 3D space.
+
+<p>All this is handled in the selection callback where you have 100% control over all user actions.
+
+<h3>The Selection Callback</h3>
+
+<pre>
+void DemoPyramid()
+{
+    .....
+    editor3D.Selection.HighlightColor = Color.Green;
+    editor3D.Selection.Callback       = OnSelectEvent;
+    editor3D.Selection.MultiSelect    = true;
+    editor3D.Selection.Enabled        = true;
+    .....
+}
+
+eInvalidate OnSelectEvent(eAltEvent e_Event, Keys e_Modifiers,
+                          int s32_DeltaX, int s32_DeltaY, cObject3D i_Object)
+{
+    eInvalidate e_Invalidate = eInvalidate.NoChange;
+
+    bool b_CTRL = (e_Modifiers & Keys.Control) &gt; 0;
+
+    if (e_Event == eAltEvent.MouseDown && !b_CTRL && i_Object != null)
+    {
+        i_Object.Selected = !i_Object.Selected; // toggle selection
+
+        // After changing the selection status the objects must be redrawn.
+        e_Invalidate = eInvalidate.Invalidate;
+    }
+    else if (e_Event == eAltEvent.MouseDrag && b_CTRL)
+    {
+        cPoint3D i_Project = editor3D.ReverseProject(s32_DeltaX, s32_DeltaY);
+
+        foreach (cPoint3D i_Selected in editor3D.Selection.GetSelectedPoints(eSelType.All))
+        {
+            i_Selected.Move(i_Project.X, i_Project.Y, i_Project.Z);
+        }
+
+        // Set flag to recalculate the coordinate system, then Invalidate()
+        e_Invalidate = eInvalidate.CoordSystem;
+    }
+
+    return e_Invalidate;
+}</pre>
+
+<p>The callback <code>OnSelectEvent()</code> receives several parameters.
+<br>Read the comment for function <code>Editor3D.SelectionCallback()</code> where they are explained.
+<br>In the first <code>if()</code> the selection of the point/object is toggled when the mouse goes down with ALT key pressed but without CTRL key.
+<br>In the <code>else if()</code> the relative movement of the mouse is reverse projected into the 3D space while the user drags the point/object.
+<br>This 3D movement in the X,Y,Z directions is then added to the X,Y,Z coordinates of the selected points.
+<p>You can write your own callback function which does whatever you like to manipulate the 3D objects.
+<br>You can change the coordinates of a 3D object, the color, the shape, the size, the selection status, the tooltip,...
+
+<p>Pay attention to the status bar which shows all mouse events:
+<p>
+<img src="Images/Editor3D_Statusbar.png" alt="System.Windows.Forms 3D Editor Control in C#" width="648" height="64">
+<p>&nbsp;
+
+<h3>Selecting an entire 3D figure</h3>
+
+<p>You can assign your own data to the property <code>Tag</code> of any 3D object.
+<br>This data may be a <code>List&lt;cObject3D&gt;</code> or any class or struct of your project.
+<br>When the callback is called because the user clicks or drags a 3D object you can obtain the data from the <code>Tag</code>.
+<br>The following code shows how to select an entire 3D figure consisting of lines, shapes and polygons when the user clicks one of them.
+
+<pre>// Add all parts of your 3D figure to a list
+List&lt;cObject3D&gt; i_Parts = new List&lt;cObject3D&gt;();
+i_Parts.Add(i_MyLine1);
+i_Parts.Add(i_MyLine2);
+i_Parts.Add(i_MyShape1);
+i_Parts.Add(i_MyPolygon1);
+i_Parts.Add(i_MyPolygon2);
+
+i_MyLine1.Tag    = i_Parts;
+i_MyLine2.Tag    = i_Parts;
+i_MyShape1.Tag   = i_Parts;
+i_MyPolygon1.Tag = i_Parts;
+i_MyPolygon2.Tag = i_Parts;
+
+.....
+
+editor3D.Selection.SinglePoints = false;
+
+.....
+
+private eInvalidate OnSelectEvent(eAltEvent e_Event, Keys e_Modifiers,
+                                  int s32_DeltaX, int s32_DeltaY, cObject3D i_Object)
+{
+    bool b_CTRL = (e_Modifiers & Keys.Control) &gt; 0;
+
+    if (e_Event == eAltEvent.MouseDown && !b_CTRL &&
+        i_Object != null && i_Object.Tag is List&lt;cObject3D&gt;)
+    {
+        bool b_Selected = !i_Object.Selected; // toggle selection
+        foreach (cObject3D i_Part in (List&lt;cObject3D&gt;)i_Object.Tag)
+        {
+            i_Part.Selected = b_Selected;
+        }
+        return eInvalidate.Invalidate;
+    }
+
+    return eInvalidate.NoChange;
+}</pre>
+
+<p>&nbsp;</p>
+
+
+<h3>Deleting 3D Objects</h3>
+
+<img src="Images/Editor3D_DeletePolygons.png" class="Img" alt="System.Windows.Forms 3D Editor Control in C#" width="429" height="369">
+
+<p>In demo 'Sphere' you can select polygons and delete them by hitting the DEL key.
+
+<pre>editor3D.KeyDown += new KeyEventHandler(OnEditorKeyDown);
+
+void OnEditorKeyDown(object sender, KeyEventArgs e)
+{
+    if (e.KeyCode != Keys.Delete)
+        return;
+
+    foreach (cObject3D i_Polygon in editor3D.Selection.GetSelectedObjects(eSelType.Polygon))
+    {
+        editor3D.RemoveObject(i_Polygon);
+    }
+    editor3D.Invalidate();
+}</pre>
+
+<p>&nbsp;</p>
+
+
+
+
+<h3>Demo Animation</h3>
+
+<img src="Images/Editor3D_Animation.gif" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="596">
+
+<p>This demo uses a timer which updates 50 scatter circles and a pyramid of 5 polygons.
+<br>The sinus is sweeping up and down slowly and changes through all colors of the rainbow.
+<br>The pyramid rotates around it's own axis and drifts up and down.
+<p>The timer calls this function every 100 ms:
+
+<pre>void ProcessAnimation()
+{
+    ms32_AnimationAngle ++;
+
+    // ======== SCATTER =========
+
+    cShape3D[]   i_AllShapes   = mi_SinusData.AllShapes;
+    cColorScheme i_ColorScheme = mi_SinusData.ColorScheme;
+    double       d_DeltaX      = 400.0 / i_AllShapes.Length;
+
+    double d_X = -200.0;
+    for (int S=0; S&lt;i_AllShapes.Length; S++, d_X += d_DeltaX)
+    {
+        cShape3D i_Shape = i_AllShapes[S];
+
+        i_Shape.Points[0].X =  d_X;
+        i_Shape.Points[0].Y = -d_X;
+        i_Shape.Points[0].Z = Math.Sin((ms32_AnimationAngle + d_X) / 50.0) * 50.0 + 50.0;
+
+        i_Shape.Brush = i_ColorScheme.GetBrush(ms32_AnimationAngle * 10);
+    }
+
+    // ======== PYRAMID =========
+
+    double d_Angle   = ms32_AnimationAngle / 30.0;
+    double d_Sinus   = Math.Sin(d_Angle) * 50.0; // -50 ... +50
+    double d_Cosinus = Math.Cos(d_Angle) * 50.0; // -50 ... +50
+    double d_DeltaZ  = d_Sinus / 2.0;            // -25 ... +25
+
+    // Top
+    mi_Pyramid[0].X = -100.0;
+    mi_Pyramid[0].Y = -100.0;
+    mi_Pyramid[0].Z =   70.0 + d_DeltaZ;
+    // Edge 1
+    mi_Pyramid[1].X = -100.0 + d_Sinus;
+    mi_Pyramid[1].Y = -100.0 + d_Cosinus;
+    mi_Pyramid[1].Z =   40.0 + d_DeltaZ;
+    // Edge 2
+    mi_Pyramid[2].X = -100.0 + d_Cosinus;
+    mi_Pyramid[2].Y = -100.0 - d_Sinus;
+    mi_Pyramid[2].Z =   40.0 + d_DeltaZ;
+    // Edge 3
+    mi_Pyramid[3].X = -100.0 - d_Sinus;
+    mi_Pyramid[3].Y = -100.0 - d_Cosinus;
+    mi_Pyramid[3].Z =   40.0 + d_DeltaZ;
+    // Edge 4
+    mi_Pyramid[4].X = -100.0 - d_Cosinus;
+    mi_Pyramid[4].Y = -100.0 + d_Sinus;
+    mi_Pyramid[4].Z =   40.0 + d_DeltaZ;
+}</pre>
+
+<p>&nbsp;</p>
+
+
+
+<h3>Tooltip</h3>
+
+<p>
+<img src="Images/Editor3D_Tooltips.png" alt="System.Windows.Forms 3D Editor Control in C#" width="667" height="279">
+</p>
+Each polygon corner shows a tooltip when the mouse is over it.
+<br>I marked in magenta the locations for the tooltip of the back part of the sphere and in pink of the front part.
+<br>If you use <code>ePolygonMode.Fill</code> you will see the tooltip also for corners which are invisible.
+<br>This means that in one rectangle on the right screenshot you may see 10 tooltips instead of 4.
+<br>Fixing this would require to detect if a corner is covered by a polygon which would extremely decrease the perfomance.
+<br>If you find this confusing, I recomend to turn off the tooltip:
+
+<pre>editor3D.TooltipMode = eTooltip.Off;</pre>
+<p>&nbsp;</p>
+
+
+<h3>Demo: Valentine</h3>
+
+<p>And last but not least:
+<br>Well, this demo has just been written on 14th february 2021.
+
+<p>
+<img src="Images/Editor3D_Valentine.png" alt="System.Windows.Forms 3D Editor Control in C#" width="697" height="596">
+
+
+<h1>Download</h1>
+
+<form action="https://netcult.ch/elmue/Download.php" method="get" target="_blank">
+<input type="hidden" name="Program" value="3D-Editor-Control">
+<input type="hidden" name="Action"  value="Download">
+<table cellspacing=0 cellpadding=0><tr>
+	<td><b>Click here to&nbsp;</b></td>
+    <td><input type="submit" value="Download"></td>
+    <td><b>&nbsp;the latest version</b></td>
+</tr></table>
+</form>
+
+<p>
+Have fun with my library. Read the plenty of comments in the code!
+
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+
+</body>
+</html>
+
